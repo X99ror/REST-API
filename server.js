@@ -21,7 +21,9 @@ app.use(cors({
     credentials:true
 }));
 dbconnect();
-
+app.get("/", (req, res) => {
+    res.redirect("/books");
+});
 
 
 
