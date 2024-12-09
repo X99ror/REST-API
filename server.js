@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 
 
-app.get("/books", requireAuth, booksController.listBooks)
+app.get("/books", booksController.listBooks)
 app.post("/books", requireAuth, booksController.addBook);
 
 app.get("/books/:id", requireAuth, booksController.getABook)
