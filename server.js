@@ -22,16 +22,14 @@ app.use(cors({
 }));
 dbconnect();
 
-app.get("/",(req,res)=>{
-    res.json({hello:"world"})
-});
 
 
 
-app.get("/books", booksController.listBooks)
-app.post("/books",booksController.addBook);
 
-app.get("/books/:id",booksController.getABook)
+app.get("/books", requireAuth, booksController.listBooks)
+app.post("/books", requireAuth, booksController.addBook);
+
+app.get("/books/:id", requireAuth, booksController.getABook)
 
 app.post("/auth/register",userController.addUser);
 app.post("/auth/login",userController.login);
@@ -40,9 +38,9 @@ app.get("/check-Auth", requireAuth, userController.checkAuth);
 
 
 
-app.put("/books/:id",booksController.updateBook)
+app.put("/books/:id",requireAuth, booksController.updateBook)
 
 
-app.delete("/books/:id", booksController.deleteBook );
+app.delete("/books/:id",requireAuth, booksController.deleteBook );
 
 app.listen(process.env.PORT);
